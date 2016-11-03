@@ -15,6 +15,9 @@ class SecondViewController: UIViewController {
     var panGesture = UIPanGestureRecognizer()
     let kBounceValue:CGFloat = 0
     
+    var previouslyActiveCell:TileCollectionViewCell?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
@@ -29,23 +32,28 @@ class SecondViewController: UIViewController {
     func panThisCell(recognizer:UIPanGestureRecognizer){
         
         let point = recognizer.locationInView(self.collectionView)
-        print(point)
-        
-        
         //convert this point to collectionview cell coordinate
         let indexpath = self.collectionView.indexPathForItemAtPoint(point)
         if indexpath == nil{  return }
         guard let cell = self.collectionView.cellForItemAtIndexPath(indexpath!) as? TileCollectionViewCell else{
+            
             return
+            
         }
+        
         switch recognizer.state {
         case .Began:
             
-           // let convertpoint =
-           /// print("converted point is \(convertpoint)")
+            // let convertpoint =
+            /// print("converted point is \(convertpoint)")
             cell.startPoint =  self.collectionView.convertPoint(point, toView: cell.customContentView)
             cell.startingRightLayoutConstraintConstant  = cell.contentViewRightConstraint.constant
-            
+            if previouslyActiveCell != cell && previouslyActiveCell != nil{
+                
+                self.resetConstraintToZero(previouslyActiveCell!,animate: true, notifyDelegateDidClose: false)
+                
+            }
+            previouslyActiveCell = cell
         case .Changed:
             
             let currentPoint =  self.collectionView.convertPoint(point, toView: cell.customContentView)
