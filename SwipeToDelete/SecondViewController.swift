@@ -14,9 +14,9 @@ class SecondViewController: UIViewController {
     
     var panGesture = UIPanGestureRecognizer()
     let kBounceValue:CGFloat = 0
-    
     var previouslyActiveCell:TileCollectionViewCell?
-    
+    var totalNumber = 40
+    var isCollectionViewScrolling = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,12 +24,14 @@ class SecondViewController: UIViewController {
         flow.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10)
         // Do any additional setup after loading the view.
         self.panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.panThisCell))
-        // panGesture.delegate = self
+        panGesture.delegate = self
         self.collectionView.addGestureRecognizer(panGesture)
         
     }
     
     func panThisCell(recognizer:UIPanGestureRecognizer){
+        
+        if isCollectionViewScrolling { return }
         
         let point = recognizer.locationInView(self.collectionView)
         //convert this point to collectionview cell coordinate
@@ -40,7 +42,6 @@ class SecondViewController: UIViewController {
             return
             
         }
-        
         switch recognizer.state {
         case .Began:
             
@@ -154,12 +155,32 @@ class SecondViewController: UIViewController {
                     self.resetConstraintToZero(cell,animate: true, notifyDelegateDidClose: true)
                 }
             }
-            
-            
             print("gesture ended")
             
         default:
             print("default")
+        }
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        isCollectionViewScrolling = true
+        print("scrolling now")
+        
+    }
+
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        
+        print("ended when scrolled too fast")
+        isCollectionViewScrolling = false
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+      
+        if !decelerate{
+            
+            print("ended dragging")
+            isCollectionViewScrolling = false
         }
     }
     
@@ -235,7 +256,7 @@ extension SecondViewController:UICollectionViewDataSource{
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 20
+        return totalNumber
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -243,6 +264,7 @@ extension SecondViewController:UICollectionViewDataSource{
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! TileCollectionViewCell
         cell.customTextLbl.text = "Swipe To Delete"
+        cell.delegate = self
         return cell
     }
 }
@@ -255,4 +277,27 @@ extension SecondViewController:UICollectionViewDelegateFlowLayout{
         return CGSize(width: width, height: 150)
         
     }
+}
+
+
+extension SecondViewController:UnPin{
+    
+    func unPintThisUnit(){
+        
+        totalNumber = totalNumber  - 1
+        let indexpath = self.collectionView.indexPathForCell(previouslyActiveCell!)
+        self.collectionView.deleteItemsAtIndexPaths([indexpath!])
+        
+    }
+}
+
+
+extension SecondViewController:UIGestureRecognizerDelegate{
+    
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        return true
+    }
+    
 }

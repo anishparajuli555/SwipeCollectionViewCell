@@ -8,6 +8,13 @@
 
 import UIKit
 
+protocol UnPin{
+
+    func unPintThisUnit()
+
+}
+
+
 class TileCollectionViewCell: UICollectionViewCell,UIGestureRecognizerDelegate {
     
     @IBOutlet weak var swipeView: UIView!
@@ -16,10 +23,16 @@ class TileCollectionViewCell: UICollectionViewCell,UIGestureRecognizerDelegate {
     @IBOutlet weak var contentViewLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var contentViewRightConstraint: NSLayoutConstraint!
     
+    var delegate:UnPin?
    
     var startPoint = CGPoint()
     var startingRightLayoutConstraintConstant = CGFloat()
     
+    @IBAction func unpinThisUnit(sender: AnyObject) {
+        
+        delegate?.unPintThisUnit()
+        
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
