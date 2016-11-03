@@ -34,7 +34,6 @@ class SecondViewController: UIViewController {
         if isCollectionViewScrolling { return }
         
         let point = recognizer.locationInView(self.collectionView)
-        //convert this point to collectionview cell coordinate
         let indexpath = self.collectionView.indexPathForItemAtPoint(point)
         if indexpath == nil{  return }
         guard let cell = self.collectionView.cellForItemAtIndexPath(indexpath!) as? TileCollectionViewCell else{
@@ -45,27 +44,26 @@ class SecondViewController: UIViewController {
         switch recognizer.state {
         case .Began:
             
-            // let convertpoint =
-            /// print("converted point is \(convertpoint)")
-            cell.startPoint =  self.collectionView.convertPoint(point, toView: cell.customContentView)
+            cell.startPoint =  self.collectionView.convertPoint(point, toView: cell)
             cell.startingRightLayoutConstraintConstant  = cell.contentViewRightConstraint.constant
             if previouslyActiveCell != cell && previouslyActiveCell != nil{
                 
                 self.resetConstraintToZero(previouslyActiveCell!,animate: true, notifyDelegateDidClose: false)
-                
             }
             previouslyActiveCell = cell
+            print("began")
+            
         case .Changed:
             
-            let currentPoint =  self.collectionView.convertPoint(point, toView: cell.customContentView)
+            let currentPoint =  self.collectionView.convertPoint(point, toView: cell)
             let deltaX = currentPoint.x - cell.startPoint.x
             var panningleft = false
             
             if currentPoint.x < cell.startPoint.x{
                 
                 panningleft = true
+                
             }
-            
             if cell.startingRightLayoutConstraintConstant == 0{
                 
                 //cell openinig first time
@@ -128,9 +126,9 @@ class SecondViewController: UIViewController {
                 self.resetConstraintToZero(cell,animate: true, notifyDelegateDidClose: true)//Cell was closed - reset everything to 0
                 
             } else {
+                
                 self.setConstraintsToShowAllButtons(cell,animate: true, notifyDelegateDidOpen: true)
             }
-            print("cancelled")
             
         case .Ended:
             
@@ -155,7 +153,6 @@ class SecondViewController: UIViewController {
                     self.resetConstraintToZero(cell,animate: true, notifyDelegateDidClose: true)
                 }
             }
-            print("gesture ended")
             
         default:
             print("default")
@@ -165,21 +162,18 @@ class SecondViewController: UIViewController {
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
         isCollectionViewScrolling = true
-        print("scrolling now")
         
     }
-
+    
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         
-        print("ended when scrolled too fast")
         isCollectionViewScrolling = false
     }
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-      
+        
         if !decelerate{
             
-            print("ended dragging")
             isCollectionViewScrolling = false
         }
     }
@@ -210,6 +204,8 @@ class SecondViewController: UIViewController {
                 cell.startingRightLayoutConstraintConstant = cell.contentViewRightConstraint.constant;
             })
         }
+        cell.startPoint = CGPoint()
+        previouslyActiveCell = nil
     }
     
     func setConstraintsToShowAllButtons(cell:TileCollectionViewCell, animate:Bool,notifyDelegateDidOpen:Bool){
