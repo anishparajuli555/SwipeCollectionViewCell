@@ -1,5 +1,5 @@
 //
-//  TileCollectionViewCell.swift
+//  CustomCollectionViewCell.swift
 //  SwipeToDelete
 //
 //  Created by Anish on 11/2/16.
@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol UnPin{
-
-    func unPintThisUnit()
-
+protocol SendCommandToVC{
+    
+    func deleteThisCell()
+    
 }
 
 
-class TileCollectionViewCell: UICollectionViewCell,UIGestureRecognizerDelegate {
+class CustomCollectionViewCell: UICollectionViewCell,UIGestureRecognizerDelegate {
     
     @IBOutlet weak var swipeView: UIView!
     @IBOutlet weak var customTextLbl: UILabel!
@@ -23,15 +23,20 @@ class TileCollectionViewCell: UICollectionViewCell,UIGestureRecognizerDelegate {
     @IBOutlet weak var contentViewLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var contentViewRightConstraint: NSLayoutConstraint!
     
-    var delegate:UnPin?
-   
+    var delegate:SendCommandToVC?
+    
     var startPoint = CGPoint()
     var startingRightLayoutConstraintConstant = CGFloat()
     
-    @IBAction func unpinThisUnit(sender: AnyObject) {
-        
-        delegate?.unPintThisUnit()
-        
+    @IBAction func unpinThisUnit(_ sender: AnyObject) {
+        if let temp = delegate{
+            
+            temp.deleteThisCell()
+            
+        }else{
+            
+            print("you forgot to set the delegate")
+        }
     }
     
     override func awakeFromNib() {

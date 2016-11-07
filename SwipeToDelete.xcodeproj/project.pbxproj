@@ -7,23 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F80A9EA51DC9F3D1001F9830 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80A9EA41DC9F3D1001F9830 /* SecondViewController.swift */; };
-		F80A9EA71DC9F4DE001F9830 /* TileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80A9EA61DC9F4DE001F9830 /* TileCollectionViewCell.swift */; };
-		F82895841DC9ABC400A950C3 /* SwipeableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82895831DC9ABC400A950C3 /* SwipeableCell.swift */; };
+		F80A9EA51DC9F3D1001F9830 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80A9EA41DC9F3D1001F9830 /* ViewController.swift */; };
+		F80A9EA71DC9F4DE001F9830 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80A9EA61DC9F4DE001F9830 /* CustomCollectionViewCell.swift */; };
 		F8B629EA1DC9A41C00B90557 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B629E91DC9A41C00B90557 /* AppDelegate.swift */; };
-		F8B629EC1DC9A41C00B90557 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B629EB1DC9A41C00B90557 /* ViewController.swift */; };
 		F8B629EF1DC9A41C00B90557 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8B629ED1DC9A41C00B90557 /* Main.storyboard */; };
 		F8B629F11DC9A41C00B90557 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8B629F01DC9A41C00B90557 /* Assets.xcassets */; };
 		F8B629F41DC9A41C00B90557 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8B629F21DC9A41C00B90557 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F80A9EA41DC9F3D1001F9830 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		F80A9EA61DC9F4DE001F9830 /* TileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileCollectionViewCell.swift; sourceTree = "<group>"; };
-		F82895831DC9ABC400A950C3 /* SwipeableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeableCell.swift; sourceTree = "<group>"; };
+		F80A9EA41DC9F3D1001F9830 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F80A9EA61DC9F4DE001F9830 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		F8B629E61DC9A41C00B90557 /* SwipeToDelete.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwipeToDelete.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8B629E91DC9A41C00B90557 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F8B629EB1DC9A41C00B90557 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F8B629EE1DC9A41C00B90557 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F8B629F01DC9A41C00B90557 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F8B629F31DC9A41C00B90557 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -61,14 +57,12 @@
 			isa = PBXGroup;
 			children = (
 				F8B629E91DC9A41C00B90557 /* AppDelegate.swift */,
-				F8B629EB1DC9A41C00B90557 /* ViewController.swift */,
 				F8B629ED1DC9A41C00B90557 /* Main.storyboard */,
 				F8B629F01DC9A41C00B90557 /* Assets.xcassets */,
 				F8B629F21DC9A41C00B90557 /* LaunchScreen.storyboard */,
 				F8B629F51DC9A41C00B90557 /* Info.plist */,
-				F82895831DC9ABC400A950C3 /* SwipeableCell.swift */,
-				F80A9EA41DC9F3D1001F9830 /* SecondViewController.swift */,
-				F80A9EA61DC9F4DE001F9830 /* TileCollectionViewCell.swift */,
+				F80A9EA41DC9F3D1001F9830 /* ViewController.swift */,
+				F80A9EA61DC9F4DE001F9830 /* CustomCollectionViewCell.swift */,
 			);
 			path = SwipeToDelete;
 			sourceTree = "<group>";
@@ -105,6 +99,7 @@
 				TargetAttributes = {
 					F8B629E51DC9A41C00B90557 = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -144,10 +139,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F80A9EA51DC9F3D1001F9830 /* SecondViewController.swift in Sources */,
-				F80A9EA71DC9F4DE001F9830 /* TileCollectionViewCell.swift in Sources */,
-				F8B629EC1DC9A41C00B90557 /* ViewController.swift in Sources */,
-				F82895841DC9ABC400A950C3 /* SwipeableCell.swift in Sources */,
+				F80A9EA51DC9F3D1001F9830 /* ViewController.swift in Sources */,
+				F80A9EA71DC9F4DE001F9830 /* CustomCollectionViewCell.swift in Sources */,
 				F8B629EA1DC9A41C00B90557 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,6 +260,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Anish.UnitTesting.SwipeToDelete;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -278,6 +272,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Anish.UnitTesting.SwipeToDelete;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
